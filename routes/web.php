@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ShortLink;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::namespace('\App\Http\Controllers')
+->name('shortLink.')
+->group( function(){
+    Route::get('/', 'ShortLinkController@index')->name('index');
+    Route::post('/store', 'ShortLinkController@store')->name('store');
+    Route::get('/{link}', 'ShortLinkController@redirect')->name('redirect');
 });
+
+
